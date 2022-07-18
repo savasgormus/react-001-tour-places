@@ -1,8 +1,6 @@
 # react-tour-places
 This project aims to create a basic tour places app with React Native.
 
-<p><img align="right"
-  src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"  width="15px"></p>
 
 # Project-001 : Tour Places (RP-01)
 
