@@ -8,3 +8,4 @@
 - src/components/header: Header.css - Header.jsx
 - src/components/navbar: Navbar.css - Navbar.jsx
 - terminale yarn add sass komutu ile SASS'ı yüklüyoruz. package.json içerisindeki depenedencies içerisinde artık görebiliriz.
+- diğer gerekli klasörler ve dosyalarımızı oluşturalım: src/helpers/data.js bu dosya içerisine en dış klasörümüzdeki data.js dosyası içerisindeki bilgileri girdik. burası bizim backendimiz olacak. yani oluşturacağımız projedeki verileri bu dosyadan çekeceğiz.
