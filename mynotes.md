@@ -76,20 +76,152 @@ p{
 
 ```
 
+- navbarımızı oluşturmaya başlayalım. components/navbar/navbar.jsx dosyamıza gidiyoruz. rafce snipper'ı ile basit bir arrow function oluşturduk ve Navbar olarak isimlendirdik. Componentimiz oluştu fakat bunu görebilmemiz için App.js dosyasına import etmeliyiz.
 
+```js
+// Navbar.jsx
+import React from 'react'
 
+const Navbar = () => {
+  return (
+    <div className='navbar'>Navbar</div>
+  )
+}
+export default Navbar
 
+// app.js
+import "./App.scss"
+import Navbar from "./components/Navbar/Navbar";
 
+const App = () =>{
+  return(
+    <div className="App">
+      <h1>Welcome React</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, ea!</p>
+      <Navbar />
+    </div>
+  )
+}
+export default App;
+```
 
+- artık navbarımız component olarak hazır. return ettiği div'in içerisine yazacağımız herşey artık HTML/CSS. burada yazacağımız herşey App.js'e aktarılacak.
+- linklerimizi oluşturduk ve stil vermek için kullanacağımız Navbar.scss dosyamızı import ettik.
 
+```js
+// Navbar.jsx
 
+import "./Navbar.scss";
 
+const Navbar = () => {
+  return (
+    <div className='navbar'>
+        <a href="#aboutus">ABOUT</a>
+        <a href="#foryou">FOR YOU</a>
+        <a href="#services">SERVICES</a>
+        <a href="#blog">BLOG</a>
+        <a href="#vlog">VLOG</a>
+        <a href="#contact">CONTACT</a>
+    </div>
+  )
+}
+export default Navbar
+```
 
+- Navbarımızı stilize etmeye başlayalım. önce _variables.scss dosyamızı import edeceğiz ve css/sass işlemine başlayacağız:
 
+```scss
+// Navbar.scss
+@import "../../scss/variables";
 
+.navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: $cardNavBgColor;
+    a{
+        color: white;
+        font-size: 2rem;
+        padding: 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        &:hover{
+            background-color: $backgroundColor;
+            color: $cardNavBgColor
+        }
+    }
+}
+``` 
 
+- Header'ımızı oluşturmaya başlayalım. components/header/Header.jsx dosyamıza rafce ile fonksiyonumuzu yazdık ve scss dosyamızı import ettik ve ekranımızda görüntüleyebilmek için App.js dosyamıza import ettik:
 
+```js
+// Header.jsx
 
+import "./Header.scss";
+
+const Header = () => {
+  return (
+    <div className='header'>
+        <h1>POPULAR TOUR PLACES</h1>
+    </div>
+  )
+}
+
+export default Header
+```
+
+- şimdi kartların olduğu Main.jsx kısmına bakalım. rafce ile temel yapımızı oluşturduk. scss dosyamızı import ettik. return içerisindeki ana div'imizde işimize başlıyoruz.
+- önce helpers içerisindeki data.js dosyasını import edelim ve console.log(data) ile console'da bu array'in titlelarını görelim. div içerisine de 0 1 2 3 .. indexleri görmeyi deneyelim. hepsini tek tek yazamayacağımız için bu data'yı map() ile sıralayacağız. daha sonra img vs gibi diğer özelliklerini sıralayalım.
+- fakat biz farklı bir yol izleyeceğiz. Main klasörü içerisine Card.js isminde bir dosya açacağız ve bu dosyada map() methodunu kullanıp bir component olarak main.jsx dosyasına import edeceğiz.
+- Card componentimizi tanımlamaya başlayalım. rafce ile yapımızı oluşturduk ve Card değişkene (data) ekledik. console.log(data) ile görüntüleyebiliriz. artık card.js içerisde data.title, data.description gibi yazdığımız herşeyi map'leyerek main.js'de göreceğiz.
+
+```js
+// cards.jsx
+import React from 'react'
+
+const Card = (data) => {
+  console.log("ne geliyor?", data);
+  return (
+    <div className='card'>
+      
+      <div className='title'>
+        <h1>{data.title}</h1>
+      </div>
+
+        <img src={data.image} alt="" />
+        
+        <div className='card-over'>
+          <p>
+            {data.desc}
+          </p>
+        </div>
+    </div>
+  )
+}
+
+export default Card
+```
+
+```js
+// main.jsx
+import "./Main.scss";
+import { data } from "../../helpers/data";
+import Card from "./Card"
+
+const Main = () => {
+  console.log(data);
+  return (
+    <div className='card-container'>
+      
+      {data.map((item,index) => (<Card {...item} key={index}/>))}
+      {/* bu kısımda Card ismini verdiğimiz component'den probs ile veri çekiyor. */}
+
+    </div>
+  )
+}
+export default Main;
+``` 
 
 
 
