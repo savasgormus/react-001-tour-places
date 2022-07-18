@@ -14,7 +14,7 @@
 import "./App.scss";
 // import işlemini yaptık
 ```
-- _reset.scss dosyası içerisine resetleme işlemi yaptık ve bunu App.scss dosyamıza import ettik. böylece margin/padding'i sıfırlamış olduk:
+- _reset.scss dosyası içerisine resetleme işlemi yaptık ve _variables.scss dosyamız ile birlikte App.scss dosyamıza import ettik. böylece margin/padding'i sıfırlamış olduk:
 ```js
 // _reset.scss
 *{
@@ -24,5 +24,105 @@ import "./App.scss";
 }
 
 // App.scss
-@import "./scss/reset"
+@import "./scss/reset";
+@import "./scss/variables";
 ```
+
+- projemizin her yerinde geçerli olacak (ör: background color gibi) özellikleri _variables.scss dosyamızda tanımlayalım:
+
+```js
+// - _variables.scss
+
+$backgroundColor: #ace0f9;
+$cardNavBgColor: #171b20;
+```
+
+- şu an projemizin anayapısını ve klasörlerini oluşturduk. App.js dosyamıza gidelim ve herşeyi silelim. Kendimiz yazacağız:
+
+```js
+// App.js
+import "./App.scss"
+
+const App = () =>{
+  return(
+    <div className="App">
+      <h1>Welcome React</h1>
+    </div>
+  )
+}
+
+export default App;
+```
+
+- google fonts'dan kullanacağımız fontları App.scss'imize import edelim:
+```js
+// App.scss
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
+
+body{
+    background-color: $backgroundColor;
+    font-family: 'Amatic SC', cursive;
+}
+
+p{
+    font-family: 'Hubballi', cursive;
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
