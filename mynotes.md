@@ -183,7 +183,7 @@ import React from 'react'
 const Card = (data) => {
   console.log("ne geliyor?", data);
   return (
-    <div className='card'>
+    <div className='cards'>
       
       <div className='title'>
         <h1>{data.title}</h1>
@@ -223,8 +223,71 @@ const Main = () => {
 export default Main;
 ``` 
 
+- artık main.scss dosyasında kartlarımızı stillendirmeye başlayabiliriz. variables'ı import ederek başlayalım. sass kullanacağımız için nested bir yapı kullanacağız.
+
+```scss
+@import "../../scss/variables";
 
 
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .cards{
+        background-color: $cardNavBgColor;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 7px;
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.7);
+        position: relative;
+
+        // .card-over'ın hover'ı için gizledik.
+        overflow: hidden;
+        
+        // .card-over'için yapacağımız işlem.
+        &:hover .card-over{
+            transform:translateY(0%); 
+        }
+    }
+    .title{
+        color: $backgroundColor;
+        padding: 1rem;
+        font-size: 1.5rem;
+    }
+    img{
+        width: 500px;
+        height: 350px;
+        // fotoğrafların boyutu değiştiğinde bozulmasın diye object-fit kullanacağız.
+        object-fit: cover;
+
+        // resmin üstüne geldiğinde gri olmasını sağlıyoruz.
+        filter:grayscale(0%);
+        &:hover{
+            filter:grayscale(100%);
+        }
+    }
+    .card-over{
+        color: white;
+        // taşmaları engellemek için position: absolute kullanıyoruz.
+        // .cards'a position relative verdik ki card-over içerisindeki öğeler ayrı ayrı
+        // kendi alanında sabitlensin.
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.5);
+        font-size: 1rem;
+        padding: 1rem;
+
+        // açıklama kısmının hover durumunda aşağıdan yukarıya doğru gelmesini istiyoruz.
+        // fakat hover'ı kartın üstüne geldiğinde vereceğiz.
+        transform:translateY(100%);
+        z-index: 1;
+        transition: transform 0.7s ease-in-out;
+    }
+}
+``` 
+
+- scss klasörünün içerisine _mixins.scss dosyasını oluşturduk.
 
 
 
