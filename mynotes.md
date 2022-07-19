@@ -287,40 +287,63 @@ export default Main;
 }
 ``` 
 
-- scss klasörünün içerisine _mixins.scss dosyasını oluşturduk.
+- scss klasörünün içerisine _mixins.scss dosyasını oluşturduk. buraya mediaquerylerimizi koyacağız ve oluşturduğumuz app'e responsive özelliği ekleyecek.
+
+```scss
+@mixin media-xsm {
+    @media screen and (min-width: 0px) {
+      @content;
+    }
+  }
+  
+  @mixin media-sm {
+    @media screen and (min-width: 576px) {
+      @content;
+    }
+  }
+  
+  @mixin media-md {
+    @media screen and (min-width: 768px) {
+      @content;
+    }
+  }
+  
+  @mixin media-lg {
+    @media screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+  
+  @mixin media-xl {
+    @media screen and (min-width: 1600px) {
+      @content;
+    }
+  }
+``` 
+
+- navbar.scss dosyamıza gidelim ve mixins dosyamızı import edelim.
+
+```scss
+@import "../../scss/mixins";
+
+// ekranı küçülttüğümüzde uyum sağlaması için navbar'a flex direction verdik.
+@include media-xsm{
+    .navbar{
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@include media-sm{
+    .navbar{
+        flex-direction: row;
+    }
+}
+```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- yarn add gh-pages / npm i gh-pages
+- package.json dosyamıza geldik ve scprits kısmına şu satırları ekledik: 
+-   "predeploy": "yarn run build", eğer npm kullanıyorsak npm run build
+-   "deploy": "gh-pages -d build"
+- dosyanın başına da "homepage": "https://savasgormus.github.io/react-001-tour-places",  github reposunun tam adı
