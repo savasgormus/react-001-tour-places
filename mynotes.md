@@ -177,6 +177,26 @@ export default Header
 - Card componentimizi tanımlamaya başlayalım. rafce ile yapımızı oluşturduk ve Card değişkene (data) ekledik. console.log(data) ile görüntüleyebiliriz. artık card.js içerisde data.title, data.description gibi yazdığımız herşeyi map'leyerek main.js'de göreceğiz.
 
 ```js
+// main.jsx
+import "./Main.scss";
+import { data } from "../../helpers/data";
+import Card from "./Card"
+
+const Main = () => {
+  console.log(data);
+  return (
+    <div className='card-container'>
+      
+      {data.map((item,index) => (<Card {...item} key={index}/>))}
+      {/* bu kısımda Card ismini verdiğimiz component'den probs ile veri çekiyor. */}
+
+    </div>
+  )
+}
+export default Main;
+``` 
+
+```js
 // cards.jsx
 import React from 'react'
 
@@ -202,26 +222,6 @@ const Card = (data) => {
 
 export default Card
 ```
-
-```js
-// main.jsx
-import "./Main.scss";
-import { data } from "../../helpers/data";
-import Card from "./Card"
-
-const Main = () => {
-  console.log(data);
-  return (
-    <div className='card-container'>
-      
-      {data.map((item,index) => (<Card {...item} key={index}/>))}
-      {/* bu kısımda Card ismini verdiğimiz component'den probs ile veri çekiyor. */}
-
-    </div>
-  )
-}
-export default Main;
-``` 
 
 - artık main.scss dosyasında kartlarımızı stillendirmeye başlayabiliriz. variables'ı import ederek başlayalım. sass kullanacağımız için nested bir yapı kullanacağız.
 
@@ -342,8 +342,3 @@ export default Main;
 ```
 
 
-- yarn add gh-pages / npm i gh-pages
-- package.json dosyamıza geldik ve scprits kısmına şu satırları ekledik: 
--   "predeploy": "yarn run build", eğer npm kullanıyorsak npm run build
--   "deploy": "gh-pages -d build"
-- dosyanın başına da "homepage": "https://savasgormus.github.io/react-001-tour-places",  github reposunun tam adı
